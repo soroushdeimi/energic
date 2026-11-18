@@ -1,0 +1,114 @@
+/*
+ * Glassmorphism panels for the capabilities hero, extracted verbatim from
+ * design-archive/_next/static/chunks/09rrv8ovxkm3n.css (CSS-module classes
+ * capabilities-mobile-module__is36BW__* and capabilities-hero-module__KsSljW__*).
+ */
+.capabilities-glass-panel,
+.capabilities-glass-card {
+  isolation: isolate;
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+  background: #ffffff61;
+  border: 1px solid #ffffffc7;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px #2536441a, inset 0 1px #ffffffe0;
+}
+
+.capabilities-glass-card {
+  background: #ffffff57;
+  border: 1px solid #ffffffb8;
+  box-shadow: 0 10px 28px #25364414, inset 0 1px #ffffffd1;
+}
+
+.capabilities-glass-panel::before,
+.capabilities-glass-card::before,
+.capabilities-glass-panel::after,
+.capabilities-glass-card::after {
+  content: "";
+  border-radius: inherit;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.capabilities-glass-panel::before,
+.capabilities-glass-card::before {
+  z-index: 1;
+  mix-blend-mode: soft-light;
+  background: linear-gradient(128deg, #ffffffb8 0%, #ffffff57 22%, #ffffff1a 46%, #fff0 72%);
+}
+
+.capabilities-glass-panel::before {
+  background: linear-gradient(128deg, #ffffff94 0%, #ffffff42 22%, #ffffff14 46%, #fff0 72%);
+}
+
+.capabilities-glass-panel::after {
+  z-index: 2;
+  background: linear-gradient(128deg, #ffffff29 0%, #0000 48%),
+    radial-gradient(130% 90% at 0 0, #ff78780d, #0000 54%),
+    radial-gradient(130% 90% at 100% 100%, #78b9ff0f, #0000 52%);
+  box-shadow: inset 0 1px 1px #ffffffe6, inset 0 -1px 1px #ffffff38, inset 1px 0 1px #ffffff6b,
+    inset -1px 0 1px #ffffff2e, inset 0 0 32px #ffffff24;
+}
+
+.capabilities-glass-card::before {
+  background: linear-gradient(128deg, #ffffff85 0%, #ffffff38 22%, #ffffff0f 46%, #fff0 72%);
+}
+
+.capabilities-glass-card::after {
+  z-index: 2;
+  background: linear-gradient(128deg, #ffffff1f 0%, #0000 44%);
+  box-shadow: inset 0 1px 1px #ffffffb8, inset 0 -1px 1px #ffffff24, inset 1px 0 1px #ffffff47,
+    inset -1px 0 1px #ffffff1a, inset 0 0 20px #ffffff14;
+}
+
+/* Desktop hero glass (blur 10px, radius 20px). */
+.capabilities-hero-glass,
+.capabilities-hero-card {
+  isolation: isolate;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background: #ffffff1a;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.capabilities-hero-glass::before,
+.capabilities-hero-glass::after,
+.capabilities-hero-card::before,
+.capabilities-hero-card::after {
+  content: "";
+  border-radius: inherit;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.capabilities-hero-glass::before,
+.capabilities-hero-card::before {
+  z-index: 1;
+  mix-blend-mode: soft-light;
+  background: linear-gradient(128deg, #ffffff3d 0%, #ffffff24 14%, #ffffff0d 34%, #ffffff04 52%, #fff0 68%);
+}
+
+.capabilities-hero-glass::after {
+  z-index: 2;
+  background: linear-gradient(128deg, #ffffff12 0%, #0000 42%),
+    radial-gradient(130% 90% at 0 0, #ff787809, #0000 54%),
+    radial-gradient(130% 90% at 100% 100%, #78b9ff0a, #0000 52%),
+    radial-gradient(120% 85% at 100% 0, #aaffd207, #0000 50%);
+  box-shadow: inset 0 1px 1px #ffffff80, inset 0 -1px 1px #ffffff1f, inset 1px 0 1px #ffffff38,
+    inset -1px 0 1px #ffffff1a, inset 0 0 30px #ffffff0d;
+}
+
+.capabilities-hero-card::after {
+  z-index: 2;
+  background: linear-gradient(128deg, #ffffff14 0%, #0000 38%),
+    radial-gradient(115% 95% at 0 0, #ff5f5f13, #0000 48%),
+    radial-gradient(115% 95% at 100% 100%, #5fa5ff16, #0000 46%),
+    radial-gradient(110% 90% at 100% 0, #a0ffc80f, #0000 44%),
+    radial-gradient(110% 90% at 0 100%, #ffb4780e, #0000 44%);
+  box-shadow: inset 0 1px 1px #ffffff85, inset 0 -1px 1px #ffffff24, inset 1px 0 1px #ffffff3d,
+    inset -1px 0 1px #ffffff1f, inset 0 0 22px #ffffff0f;
+}

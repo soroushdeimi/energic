@@ -1,0 +1,13 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% block title %}{% translate "Two-factor authentication" %}{% endblock %}
+{% block content %}
+<h1>{% translate "Two-factor authentication" %}</h1>
+<p>{% blocktranslate with name=username %}Enter the 6-digit code from your authenticator app, {{ name }}.{% endblocktranslate %}</p>
+<form method="post">{% csrf_token %}
+  <input type="text" name="token" maxlength="6" inputmode="numeric" autocomplete="one-time-code" required
+         style="font-size:2rem;letter-spacing:0.5rem;text-align:center;width:220px;">
+  <br><br>
+  <input type="submit" value="{% translate 'Verify' %}" class="button default">
+</form>
+{% endblock %}

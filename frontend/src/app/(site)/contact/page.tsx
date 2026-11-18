@@ -1,9 +1,12 @@
-import { Section } from "@/components/Section";
+import type { Metadata } from "next";
+import { ContactSection } from "@/components/contact/ContactSection";
+
+export const metadata: Metadata = {
+  title: "تماس و آدرس | مرکز نوآوری انرژیک",
+  description:
+    "آدرس: ولیعصر، دانشگاه صنعتی امیرکبیر، دانشکده مهندسی نفت، طبقه اول. تلفن ۰۲۱-۶۶۴۶۰۰۴۳، ایمیل energyinnovationcenter1@gmail.com و نقشه Google Maps.",
+};
 
 export default function ContactPage() {
-  return (
-    <Section title="تماس با ما">
-      <p className="text-muted">محتوای این صفحه در دست ساخت است.</p>
-    </Section>
-  );
+  return <ContactSection />;
 }

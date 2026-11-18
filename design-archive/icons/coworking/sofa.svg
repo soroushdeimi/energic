@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="43.25" height="32.25" viewBox="0 0 43.25 32.25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="sofa">
+<path id="Vector" d="M36.75 13.375C36.75 12.6457 37.0397 11.9462 37.5555 11.4305C38.0712 10.9147 38.7707 10.625 39.5 10.625C40.2293 10.625 40.9288 10.9147 41.4445 11.4305C41.9603 11.9462 42.25 12.6457 42.25 13.375V27.125H1V13.375C1 12.6457 1.28973 11.9462 1.80546 11.4305C2.32118 10.9147 3.02065 10.625 3.75 10.625C4.47935 10.625 5.17882 10.9147 5.69454 11.4305C6.21027 11.9462 6.5 12.6457 6.5 13.375" stroke="#00A950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M32.625 1H10.625C9.53098 1 8.48177 1.4346 7.70818 2.20818C6.9346 2.98177 6.5 4.03098 6.5 5.125V20.25H36.75V5.125C36.75 4.03098 36.3154 2.98177 35.5418 2.20818C34.7682 1.4346 33.719 1 32.625 1Z" stroke="#00A950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M6.5 18.875C6.5 17.781 6.9346 16.7318 7.70818 15.9582C8.48177 15.1846 9.53098 14.75 10.625 14.75H32.625C33.719 14.75 34.7682 15.1846 35.5418 15.9582C36.3154 16.7318 36.75 17.781 36.75 18.875" stroke="#00A950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M6.5 27.125V31.25" stroke="#00A950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_5" d="M36.75 31.25V27.125" stroke="#00A950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

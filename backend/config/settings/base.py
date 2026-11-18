@@ -66,9 +66,19 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = "fa"
+LANGUAGES = [("fa", "فارسی"), ("en", "English")]
 TIME_ZONE = "Asia/Tehran"
 USE_I18N = True
 USE_TZ = True
+
+# Two-factor (TOTP) for the Django admin.
+OTP_ISSUER = "Energic Innovation Center"
+
+# Lead notifications (email; optional Telegram token/recipient).
+DEFAULT_FROM_EMAIL = env("EMAIL_FROM", default="webmaster@localhost")
+LEAD_NOTIFY_EMAILS = env.list("LEAD_NOTIFY_EMAILS", default=[])
+LEAD_TELEGRAM_BOT_TOKEN = env("LEAD_TELEGRAM_BOT_TOKEN", default="")
+LEAD_TELEGRAM_CHAT_ID = env("LEAD_TELEGRAM_CHAT_ID", default="")
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"

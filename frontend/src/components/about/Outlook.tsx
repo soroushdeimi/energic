@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/SiteImage";
 
 export interface OutlookData {
   title: string;
@@ -73,6 +73,8 @@ export function Outlook({ data }: { data: OutlookData }) {
               <Image
                 src="/icons/about/outlook-lamp.svg"
                 alt=""
+                width={343}
+                height={301}
                 className="size-full"
                 style={{ maxWidth: "none" }}
                 aria-hidden="true"
@@ -88,6 +90,8 @@ export function Outlook({ data }: { data: OutlookData }) {
               <Image
                 src="/icons/about/outlook-dots.svg"
                 alt=""
+                width={194}
+                height={418}
                 className="size-full"
                 style={{ maxWidth: "none" }}
                 aria-hidden="true"

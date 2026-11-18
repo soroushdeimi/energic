@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/SiteImage";
 import type { CSSProperties } from "react";
 
 import type { CapabilityCategory, CapabilityItem } from "./CapabilitiesMobile";
@@ -153,6 +153,8 @@ export function CapabilitiesDesktop({ data }: { data: CapabilitiesDesktopData })
                     src={item.image}
                     alt=""
                     aria-hidden
+                    width={940}
+                    height={524}
                     className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[20px] object-cover"
                   />
                 </div>

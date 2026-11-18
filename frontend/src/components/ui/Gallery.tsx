@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/SiteImage";
 import type { CoworkingData } from "@/lib/api";
 
 interface GalleryProps {

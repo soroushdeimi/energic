@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/SiteImage";
 import type { Company } from "@/lib/api";
 import { Card } from "./Card";
 

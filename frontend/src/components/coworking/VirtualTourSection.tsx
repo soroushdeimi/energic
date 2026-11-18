@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/SiteImage";
 
 /**
  * «تور مجازی دیجیتال انرژیک» section of /coworking.

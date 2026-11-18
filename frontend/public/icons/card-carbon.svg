@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="414" height="330" viewBox="0 0 414 330" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Subtract" filter="url(#filter0_d_0_13)">
+<path d="M359 5C381.091 5 399 22.9086 399 45V245C399 256.046 390.046 265 379 265H376.569C365.524 265 356.569 273.954 356.569 285C356.569 296.046 347.615 305 336.569 305H55C32.9086 305 15 287.091 15 265V65C15 53.9543 23.9543 45 35 45H37.4316C48.4773 45 57.4316 36.0457 57.4316 25C57.4316 13.9543 66.3859 5 77.4316 5H359Z" fill="#253644"/>
+</g>
+<defs>
+<filter id="filter0_d_0_13" x="0" y="0" width="414" height="330" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="10"/>
+<feGaussianBlur stdDeviation="7.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.662745 0 0 0 0 0.313726 0 0 0 0.3 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_13"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_13" result="shape"/>
+</filter>
+</defs>
+</svg>

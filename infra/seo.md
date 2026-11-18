@@ -7,11 +7,11 @@ how the **GitHub Pages preview** differs from the **production** deployment.
 
 | | Production | GitHub Pages preview |
 |---|---|---|
-| Origin | `https://energiccenter.ir` | `https://<user>.github.io/energic/` |
+| Origin | `https://energiccenter.ir` | `https://soroushdeimi.github.io/energic/` |
 | Build | `pnpm build` (server mode) | `pnpm build:static` (`GITHUB_PAGES=true`, `basePath=/energic`, `output: export`) |
 | Indexing | `index, follow` | `noindex, follow` |
-| Canonical | real production URL | real production URL (unchanged) |
-| OG image | `https://energiccenter.ir/logos/footer-logo.png` | `https://energiccenter.ir/energic/logos/footer-logo.png` (resolves on the preview origin) |
+| Canonical | production preferred URL (root = bare origin, sub-routes no trailing slash) | same production preferred URL (unchanged) |
+| OG image | `https://energiccenter.ir/logos/footer-logo.png` | `https://soroushdeimi.github.io/energic/logos/footer-logo.png` (the real deployed preview asset) |
 
 The preview is a **visual preview only**. It is *not* a domain migration and
 must never be treated as the canonical host. Every preview page therefore:
@@ -25,22 +25,36 @@ must never be treated as the canonical host. Every preview page therefore:
 `noindex, follow` when `NEXT_PUBLIC_BASE_PATH` is set (preview) and
 `index, follow` otherwise (production/server mode).
 
-## Why the preview OG image uses the production origin
+## Preview OG image uses the real preview origin
 
-The preview origin (`<user>.github.io`) is unknown at build time, so the
-absolute OG/Twitter image URL is derived from the base path:
-`https://energiccenter.ir/energic/logos/footer-logo.png`. The path
-`/energic/logos/footer-logo.png` is exactly where the asset is served on the
-preview origin, so shared cards actually load. In production the same helper
-emits `https://energiccenter.ir/logos/footer-logo.png`.
+The preview origin is **known** for this repo: `https://soroushdeimi.github.io`
+(configurable via `NEXT_PUBLIC_PREVIEW_ORIGIN`). The preview OG/Twitter image
+is therefore the exact deployed asset URL
+`https://soroushdeimi.github.io/energic/logos/footer-logo.png` (verified
+HTTP 200, `image/png`). In production the same helper emits
+`https://energiccenter.ir/logos/footer-logo.png`. The production host is never
+used as a stand-in for the preview.
+
+## Canonical URLs match the production preferred form
+
+Production serves sub-routes **without** a trailing slash
+(`https://energiccenter.ir/about/` 308-redirects to `/about`), and the live
+site's own canonical tags use that form (root = bare origin
+`https://energiccenter.ir`, sub-routes e.g. `https://energiccenter.ir/about`).
+`canonicalUrl()` emits exactly those URLs, and the sitemap and per-page
+JSON-LD use the same final URLs. The GitHub Pages export keeps its own
+`trailingSlash: true` for internal navigation and filesystem layout — only the
+production canonical URLs drop the slash. (In the preview, `metadataBase` is
+the preview origin, so Next.js does not re-apply the preview's trailing slash
+to the external production canonicals.)
 
 ## sitemap.xml
 
 - Always lists **only the six public production routes**
   (`/`, `/about`, `/capabilities`, `/companies`, `/coworking`, `/contact`).
-- URLs are always the production canonical URLs, even when served from the
-  preview — the preview must not advertise its own (noindex) URLs for
-  indexing.
+- URLs are the production canonical URLs (root keeps its slash, sub-routes use
+  the no-trailing-slash preferred form), even when served from the preview —
+  the preview must not advertise its own (noindex) URLs for indexing.
 - `tokens` and `404` are excluded.
 - `force-static` keeps it a plain static file in both server mode and the
   static export (Next 15 metadata routes are dynamic by default).

@@ -10,31 +10,36 @@ import { serializeJsonLd } from "../src/components/seo/JsonLd";
  */
 
 const PROD = "https://energiccenter.ir";
+/** Real GitHub Pages preview origin (matches NEXT_PUBLIC_PREVIEW_ORIGIN default). */
+const PREVIEW_ORIGIN = "https://soroushdeimi.github.io";
 const BASE = "/energic";
 const BASE_URL = process.env.E2E_BASE_URL ?? "http://localhost:8445/energic/";
 /** Origin + base path with no trailing slash, for raw request.get() calls. */
 const ROOT = BASE_URL.replace(/\/$/, "");
 
 // The six public production routes (tokens and 404 are excluded on purpose).
+// Canonicals use the production *preferred* URLs, exactly as the live site
+// emits them: the root is the bare origin and sub-routes have no trailing
+// slash (production 308-redirects `/about/` → `/about`).
 const PAGES: { path: string; canonical: string; title: string }[] = [
-  { path: "/", canonical: `${PROD}/`, title: "مرکز نوآوری انرژیک | Energic Innovation Center" },
-  { path: "about/", canonical: `${PROD}/about/`, title: "درباره ما | مرکز نوآوری انرژیک" },
+  { path: "/", canonical: PROD, title: "مرکز نوآوری انرژیک | Energic Innovation Center" },
+  { path: "about/", canonical: `${PROD}/about`, title: "درباره ما | مرکز نوآوری انرژیک" },
   {
     path: "capabilities/",
-    canonical: `${PROD}/capabilities/`,
+    canonical: `${PROD}/capabilities`,
     title: "توانمندی‌های تخصصی | مرکز نوآوری انرژیک",
   },
   {
     path: "companies/",
-    canonical: `${PROD}/companies/`,
+    canonical: `${PROD}/companies`,
     title: "شرکت‌ها و سهامداران | مرکز نوآوری انرژیک",
   },
   {
     path: "coworking/",
-    canonical: `${PROD}/coworking/`,
+    canonical: `${PROD}/coworking`,
     title: "فضای کار اشتراکی | مرکز نوآوری انرژیک",
   },
-  { path: "contact/", canonical: `${PROD}/contact/`, title: "تماس و آدرس | مرکز نوآوری انرژیک" },
+  { path: "contact/", canonical: `${PROD}/contact`, title: "تماس و آدرس | مرکز نوآوری انرژیک" },
 ];
 
 function metaContent(html: string, selector: string): string | null {
@@ -57,12 +62,6 @@ function jsonLdBlocks(html: string): unknown[] {
     blocks.push(JSON.parse(m[1]!));
   }
   return blocks;
-}
-
-/** Strip the `/energic` base from the preview origin to get the bare origin. */
-function previewOrigin(baseURL: string): string {
-  const url = new URL(baseURL);
-  return `${url.protocol}//${url.host}`;
 }
 
 test.describe("SEO — static preview", () => {
@@ -116,11 +115,16 @@ test.describe("SEO — static preview", () => {
       expect(metaContent(html, "twitter:card"), "twitter:card").toBeTruthy();
       expect(metaContent(html, "twitter:image"), "twitter:image").toBe(ogImage);
 
-      // The OG image path must resolve on the preview origin (basePath /energic).
-      const ogPath = new URL(ogImage!).pathname;
-      expect(ogPath).toBe(`${BASE}/logos/footer-logo.png`);
-      const imgRes = await request.get(`${previewOrigin(BASE_URL)}${ogPath}`);
-      expect(imgRes.status(), "og image resolvable on preview").toBe(200);
+      // The preview OG image must be the *real* deployed preview URL: the
+      // GitHub Pages origin (not the production host) + the /energic base path.
+      const ogUrl = new URL(ogImage!);
+      expect(ogUrl.host, "og:image host is the preview origin").toBe(new URL(PREVIEW_ORIGIN).host);
+      expect(ogUrl.pathname, "og:image path").toBe(`${BASE}/logos/footer-logo.png`);
+      // Fetch the emitted public OG URL itself (not a local equivalent) and
+      // expect a real 200 image.
+      const imgRes = await request.get(ogImage!);
+      expect(imgRes.status(), "emitted public og:image resolves 200").toBe(200);
+      expect(imgRes.headers()["content-type"]).toContain("image/");
 
       // All JSON-LD blocks must be valid, parseable JSON.
       const blocks = jsonLdBlocks(html);
@@ -153,8 +157,21 @@ test.describe("SEO — static preview", () => {
       expect(loc).not.toContain("tokens");
       expect(loc).not.toContain("404");
     }
+    // Root keeps its slash; sub-routes use the production preferred form
+    // (no trailing slash).
     expect(locs).toContain(`${PROD}/`);
-    expect(locs).toContain(`${PROD}/contact/`);
+    expect(locs).toContain(`${PROD}/contact`);
+    expect(locs).not.toContain(`${PROD}/contact/`);
+  });
+
+  test("production canonical targets resolve 200 directly (no redirect)", async ({ request }) => {
+    // Prove the canonical/sitemap production URLs are the real preferred
+    // URLs: each must return 200 without following a redirect (a 308 would
+    // mean we pointed at the wrong, slash-suffixed form).
+    for (const page of PAGES) {
+      const res = await request.get(page.canonical, { maxRedirects: 0 });
+      expect(res.status(), `${page.canonical} must be 200 directly`).toBe(200);
+    }
   });
 
   test("robots.txt is valid, points at production sitemap, no Disallow: /", async ({ request }) => {

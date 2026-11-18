@@ -18,8 +18,22 @@ export interface PartnersData {
  * (100px tiles). The last mobile row is offset (padding-left 53px, gap 14px)
  * to match the archive.
  */
+/**
+ * Desktop row order is a fixed permutation of the (mobile-ordered) logo list,
+ * taken verbatim from the archive's desktop grid. The mobile stack keeps the
+ * fixture order; only the desktop rows are re-ordered.
+ */
+const DESKTOP_ROW_INDICES: number[][] = [
+  [3, 4, 5, 0, 1, 2],
+  [9, 10, 11, 6, 7, 8],
+  [15, 16, 12, 13, 14],
+];
+
 export function Partners({ data }: { data: PartnersData }) {
   const logos = data.logos;
+  const desktopRows = DESKTOP_ROW_INDICES.map((row) =>
+    row.map((i) => logos[i]).filter((logo): logo is PartnerLogo => Boolean(logo)),
+  );
   return (
     <section aria-labelledby="partners-heading" className="bg-bg-soft md:pt-0 md:pb-20">
       {/* Mobile */}
@@ -76,7 +90,7 @@ export function Partners({ data }: { data: PartnersData }) {
           <br />
           همکاران کلیدی
         </h2>
-        {chunk(logos, 6).map((row, ri) => (
+        {desktopRows.map((row, ri) => (
           <div
             key={ri}
             dir="ltr"

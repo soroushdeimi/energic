@@ -283,7 +283,7 @@ export function Footer() {
         </div>
         <h2
           dir="rtl"
-          className="absolute left-[243px] top-[84px] z-[2] h-[28px] w-[109px] text-right text-[20px] font-semibold leading-[28px] tracking-[-0.5px] text-green"
+          className="absolute left-[243px] top-[84px] z-[2] h-[28px] w-[109px] whitespace-nowrap text-right text-[20px] font-semibold leading-[28px] tracking-[-0.5px] text-green"
         >
           اطلاعات تماس
         </h2>

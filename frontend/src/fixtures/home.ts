@@ -85,13 +85,25 @@ export const homeFixture: PageDetail = {
       key: "partners",
       data: {
         title: "شبکه ارتباطات راهبردی و همکاران کلیدی",
-        // Only the partner logos that exist in the design archive are rendered.
-        // The remaining 13 logo files are absent from the archive (see report).
+        // All 17 partner logos in archive order (design-archive/pages/home/index.html).
         logos: [
-          { name: "دانشگاه شریف", logo: "/logos/sadid.webp" },
+          { name: "سدید", logo: "/logos/sadid.webp" },
           { name: "شرکت ۳", logo: "/logos/3-orig.webp" },
           { name: "Carbonbared", logo: "/logos/carbonbared.webp" },
+          { name: "دانشگاه شریف", logo: "/logos/sharif.webp" },
+          { name: "Akut", logo: "/logos/akut.webp" },
           { name: "شرکت آپادانا", logo: "/logos/apadana.webp" },
+          { name: "TEPCO", logo: "/logos/tepco.webp" },
+          { name: "Mahed", logo: "/logos/mahed.webp" },
+          { name: "پارک علم و فناوری دانشگاه امیرکبیر", logo: "/logos/aut-park.webp" },
+          { name: "مرکز شتابدهی نوآوری", logo: "/logos/accelerator.webp" },
+          { name: "Layout Set", logo: "/logos/layout-set.webp" },
+          { name: "Header Logo", logo: "/logos/header-logo.webp" },
+          { name: "IRVC", logo: "/logos/irvc.webp" },
+          { name: "تیوا انرژی شمس", logo: "/logos/tiva.webp" },
+          { name: "Logo PNG", logo: "/logos/logo-png.webp" },
+          { name: "پارک نوآوری و فناوری صنعت نفت", logo: "/logos/oil-park.webp" },
+          { name: "دانشکده نفت دانشگاه امیرکبیر", logo: "/logos/oil-faculty.webp" },
         ],
       },
     },

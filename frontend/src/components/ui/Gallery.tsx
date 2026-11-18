@@ -12,6 +12,16 @@ interface GalleryProps {
 const OVERLAY_GRADIENT =
   "linear-gradient(to bottom, rgba(0,0,0,0) 2.31%, rgba(255,255,255,0.7) 90.105%)";
 
+/**
+ * Captions are keyed by image basename (e.g. `gallery-coworking-1.webp`) while
+ * gallery items carry the full public path (`/images/coworking/...`). Resolve
+ * the caption by basename so the lookup is robust to the path prefix.
+ */
+function captionFor(image: string, captions: Record<string, string>): string {
+  const basename = image.split("/").pop() ?? image;
+  return captions[basename] ?? captions[image] ?? "";
+}
+
 function GalleryFigure({ image, alt, caption }: { image: string; alt: string; caption: string }) {
   return (
     <figure className="relative aspect-[384/298] overflow-hidden rounded-[40px] border border-[rgba(37,54,68,0.3)] md:aspect-auto md:h-[298px] md:w-[384px]">
@@ -58,7 +68,7 @@ export function Gallery({ items, captions, desktopOrder }: GalleryProps) {
               key={item.image}
               image={item.image}
               alt={item.alt}
-              caption={captions[item.image] ?? ""}
+              caption={captionFor(item.image, captions)}
             />
           ))}
         </div>
@@ -70,7 +80,7 @@ export function Gallery({ items, captions, desktopOrder }: GalleryProps) {
             key={item.image}
             image={item.image}
             alt={item.alt}
-            caption={captions[item.image] ?? ""}
+            caption={captionFor(item.image, captions)}
           />
         ))}
       </div>

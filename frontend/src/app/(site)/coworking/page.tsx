@@ -43,12 +43,12 @@ export default function CoworkingPage() {
           <div dir="ltr" className="flex flex-col gap-5">
             <div className="grid grid-cols-2 justify-items-center gap-x-4 gap-y-5">
               {mobileAmenities.slice(0, 4).map((amenity) => (
-                <AmenityItem key={amenity.label} icon={amenity.icon} label={amenity.label} />
+                <AmenityItem key={amenity.label} id={amenity.id ?? ""} icon={amenity.icon} label={amenity.label} />
               ))}
             </div>
             <div className="flex justify-center">
               {mobileAmenities[4] ? (
-                <AmenityItem icon={mobileAmenities[4].icon} label={mobileAmenities[4].label} />
+                <AmenityItem id={mobileAmenities[4].id ?? ""} icon={mobileAmenities[4].icon} label={mobileAmenities[4].label} />
               ) : null}
             </div>
           </div>
@@ -56,7 +56,7 @@ export default function CoworkingPage() {
         {/* Desktop: single row of 5 (archive order). */}
         <div dir="ltr" className="mx-auto hidden w-[996px] grid-cols-[repeat(5,180px)] gap-6 md:grid">
           {amenities.map((amenity) => (
-            <AmenityItem key={amenity.label} icon={amenity.icon} label={amenity.label} />
+            <AmenityItem key={amenity.label} id={amenity.id ?? ""} icon={amenity.icon} label={amenity.label} />
           ))}
         </div>
       </section>

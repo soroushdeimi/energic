@@ -43,7 +43,7 @@ export interface Capability {
 
 export interface CoworkingData {
   gallery: { image: string; alt: string }[];
-  amenities: { icon: string; label: string }[];
+  amenities: { id?: string; icon: string; label: string }[];
 }
 
 export interface NewsItem {

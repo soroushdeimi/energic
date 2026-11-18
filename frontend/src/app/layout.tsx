@@ -28,7 +28,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fa" dir="rtl" className={`${peyda.variable} ${vazirmatn.variable}`}>
-      <body className="min-h-screen bg-bg font-peyda text-ink antialiased">{children}</body>
+      <body className="flex min-h-dvh w-full flex-col bg-bg-soft font-peyda text-ink antialiased">
+        {children}
+      </body>
     </html>
   );
 }

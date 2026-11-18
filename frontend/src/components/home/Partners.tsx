@@ -13,14 +13,15 @@ export interface PartnersData {
 /**
  * "Strategic network & key partners" logo grid.
  *
- * The archive references 17 partner logos but only 4 logo files exist in the
- * design archive; the rest are absent (see report). We render the available
- * logos in the same 3-row desktop / 3-col mobile layout.
+ * Renders all 17 partner logos in archive order: a 6/6/5 three-row grid on
+ * desktop (140px white rounded tiles) and a three-column stack on mobile
+ * (100px tiles). The last mobile row is offset (padding-left 53px, gap 14px)
+ * to match the archive.
  */
 export function Partners({ data }: { data: PartnersData }) {
   const logos = data.logos;
   return (
-    <section aria-labelledby="partners-heading" className="bg-bg md:pt-0 md:pb-20">
+    <section aria-labelledby="partners-heading" className="bg-bg-soft md:pt-0 md:pb-20">
       {/* Mobile */}
       <div className="mx-auto pt-[50px] md:hidden" style={{ width: 320 }}>
         <h2
@@ -33,8 +34,15 @@ export function Partners({ data }: { data: PartnersData }) {
           <span className="block h-[30px] whitespace-nowrap">همکاران کلیدی</span>
         </h2>
         <div className="flex flex-col" style={{ width: 320, gap: 10 }}>
-          {chunk(logos, 3).map((row, ri) => (
-            <ul key={ri} dir="ltr" className="flex" style={{ width: 320, gap: 10 }}>
+          {chunk(logos, 3).map((row, ri) => {
+            const isLast = ri === Math.ceil(logos.length / 3) - 1 && logos.length % 3 !== 0;
+            return (
+            <ul
+              key={ri}
+              dir="ltr"
+              className="flex"
+              style={{ width: 320, gap: isLast ? 14 : 10, paddingLeft: isLast ? 53 : 0 }}
+            >
               {row.map((logo) => (
                 <li key={logo.name}>
                   <div
@@ -52,7 +60,8 @@ export function Partners({ data }: { data: PartnersData }) {
                 </li>
               ))}
             </ul>
-          ))}
+            );
+          })}
         </div>
       </div>
 

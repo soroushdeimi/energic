@@ -18,11 +18,11 @@ export const coworkingFixture: CoworkingData = {
     { image: "/images/coworking/gallery-dining-hall-2.webp", alt: "سالن غذاخوری ۲ در انرژیک" },
   ],
   amenities: [
-    { icon: "/icons/coworking/map.svg", label: "دسترسی مرکزی" },
-    { icon: "/icons/coworking/sofa.svg", label: "مبلمان ارگونومیک" },
-    { icon: "/icons/coworking/coffee-cup.svg", label: "پذیرایی رایگان" },
-    { icon: "/icons/coworking/mail.svg", label: "کد پستی شرکتی" },
-    { icon: "/icons/coworking/internet.svg", label: "اینترنت فیبر نوری" },
+    { id: "central-access", icon: "/icons/coworking/map.svg", label: "دسترسی مرکزی" },
+    { id: "ergonomic-furniture", icon: "/icons/coworking/sofa.svg", label: "مبلمان ارگونومیک" },
+    { id: "free-catering", icon: "/icons/coworking/coffee-cup.svg", label: "پذیرایی رایگان" },
+    { id: "corporate-postal", icon: "/icons/coworking/mail.svg", label: "کد پستی شرکتی" },
+    { id: "fiber-internet", icon: "/icons/coworking/internet.svg", label: "اینترنت فیبر نوری" },
   ],
 };
 

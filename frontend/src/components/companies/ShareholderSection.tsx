@@ -15,7 +15,7 @@ export function ShareholderSection({ shareholders }: ShareholderSectionProps) {
       className="bg-bg-soft pb-10 md:pb-[80px]"
     >
       <div className="mx-auto max-w-[1200px] px-5 md:px-0">
-        <SectionTitle title="سهامداران اصلی" align="end" className="mb-[-29px] md:mb-0" />
+        <SectionTitle title="سهامداران اصلی" align="start" className="mb-[-29px] md:mb-0" />
         <div className="mt-6 md:mt-[40px]">
           <LogoGrid companies={shareholders} />
         </div>

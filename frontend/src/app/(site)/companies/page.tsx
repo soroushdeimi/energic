@@ -1,6 +1,33 @@
+import type { Metadata } from "next";
 import { ShareholderSection } from "@/components/companies/ShareholderSection";
 import { ResidentSection } from "@/components/companies/ResidentSection";
+import { PageSchema } from "@/components/seo/SiteSchema";
 import { companiesFixture } from "@/fixtures/companies";
+import { canonicalUrl, ogImageUrl, pageRobots } from "@/lib/seo";
+
+const COMPANIES_TITLE = "شرکت‌ها و سهامداران | مرکز نوآوری انرژیک";
+const COMPANIES_DESCRIPTION =
+  "سهامداران، شرکای استراتژیک و شرکت‌های مستقر در مرکز نوآوری انرژیک؛ اکوسیستم نوآوری انرژی و شبکه همکاری با صنعت و دانشگاه در تهران";
+
+export const metadata: Metadata = {
+  title: COMPANIES_TITLE,
+  description: COMPANIES_DESCRIPTION,
+  alternates: { canonical: canonicalUrl("/companies") },
+  openGraph: {
+    type: "website",
+    title: COMPANIES_TITLE,
+    description: COMPANIES_DESCRIPTION,
+    url: canonicalUrl("/companies"),
+    images: [ogImageUrl()],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: COMPANIES_TITLE,
+    description: COMPANIES_DESCRIPTION,
+    images: [ogImageUrl()],
+  },
+  robots: pageRobots(),
+};
 
 export default function CompaniesPage() {
   const { shareholders, residents } = companiesFixture;
@@ -19,6 +46,13 @@ export default function CompaniesPage() {
       </section>
       <ShareholderSection shareholders={shareholders} />
       <ResidentSection residents={residents} />
+      <PageSchema
+        path="/companies"
+        pageType="WebPage"
+        name={COMPANIES_TITLE}
+        description={COMPANIES_DESCRIPTION}
+        breadcrumbLabel="شرکت‌ها و سهامداران"
+      />
     </main>
   );
 }

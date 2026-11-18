@@ -1,6 +1,8 @@
+import type { Metadata } from "next";
 import { Gallery } from "@/components/ui/Gallery";
 import { AmenityItem } from "@/components/ui/AmenityItem";
 import { VirtualTourSection } from "@/components/coworking/VirtualTourSection";
+import { PageSchema } from "@/components/seo/SiteSchema";
 import {
   coworkingFixture,
   desktopGalleryOrder,
@@ -8,6 +10,31 @@ import {
   mobileAmenityOrder,
 } from "@/fixtures/coworking";
 import type { CoworkingData } from "@/lib/api";
+import { canonicalUrl, ogImageUrl, pageRobots } from "@/lib/seo";
+
+const COWORKING_TITLE = "فضای کار اشتراکی | مرکز نوآوری انرژیک";
+const COWORKING_DESCRIPTION =
+  "فضای کار اشتراکی انرژیک در دانشکده مهندسی نفت دانشگاه صنعتی امیرکبیر، تهران — اینترنت فیبر نوری، مبلمان ارگونومیک و دسترسی مرکزی برای تیم‌ها و استارتاپ‌ها";
+
+export const metadata: Metadata = {
+  title: COWORKING_TITLE,
+  description: COWORKING_DESCRIPTION,
+  alternates: { canonical: canonicalUrl("/coworking") },
+  openGraph: {
+    type: "website",
+    title: COWORKING_TITLE,
+    description: COWORKING_DESCRIPTION,
+    url: canonicalUrl("/coworking"),
+    images: [ogImageUrl()],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: COWORKING_TITLE,
+    description: COWORKING_DESCRIPTION,
+    images: [ogImageUrl()],
+  },
+  robots: pageRobots(),
+};
 
 export default function CoworkingPage() {
   const { gallery, amenities } = coworkingFixture;
@@ -29,8 +56,8 @@ export default function CoworkingPage() {
             dir="rtl"
             className="text-[12px] font-medium leading-[30px] text-ink md:mt-0 md:text-[16px] md:leading-[50px]"
           >
-            نمایی از فضاهای کاری طراحی‌شده برای تمرکز، همکاری و رشد؛ از محیط‌های اشتراکی
-            الهام‌بخش تا اتاق‌های جلسات و فضاهای آماده برگزاری رویداد.
+            نمایی از فضاهای کاری طراحی‌شده برای تمرکز، همکاری و رشد؛ از محیط‌های اشتراکی الهام‌بخش
+            تا اتاق‌های جلسات و فضاهای آماده برگزاری رویداد.
           </p>
         </div>
       </section>
@@ -43,24 +70,48 @@ export default function CoworkingPage() {
           <div dir="ltr" className="flex flex-col gap-5">
             <div className="grid grid-cols-2 justify-items-center gap-x-4 gap-y-5">
               {mobileAmenities.slice(0, 4).map((amenity) => (
-                <AmenityItem key={amenity.label} id={amenity.id ?? ""} icon={amenity.icon} label={amenity.label} />
+                <AmenityItem
+                  key={amenity.label}
+                  id={amenity.id ?? ""}
+                  icon={amenity.icon}
+                  label={amenity.label}
+                />
               ))}
             </div>
             <div className="flex justify-center">
               {mobileAmenities[4] ? (
-                <AmenityItem id={mobileAmenities[4].id ?? ""} icon={mobileAmenities[4].icon} label={mobileAmenities[4].label} />
+                <AmenityItem
+                  id={mobileAmenities[4].id ?? ""}
+                  icon={mobileAmenities[4].icon}
+                  label={mobileAmenities[4].label}
+                />
               ) : null}
             </div>
           </div>
         </div>
         {/* Desktop: single row of 5 (archive order). */}
-        <div dir="ltr" className="mx-auto hidden w-[996px] grid-cols-[repeat(5,180px)] gap-6 md:grid">
+        <div
+          dir="ltr"
+          className="mx-auto hidden w-[996px] grid-cols-[repeat(5,180px)] gap-6 md:grid"
+        >
           {amenities.map((amenity) => (
-            <AmenityItem key={amenity.label} id={amenity.id ?? ""} icon={amenity.icon} label={amenity.label} />
+            <AmenityItem
+              key={amenity.label}
+              id={amenity.id ?? ""}
+              icon={amenity.icon}
+              label={amenity.label}
+            />
           ))}
         </div>
       </section>
       <VirtualTourSection />
+      <PageSchema
+        path="/coworking"
+        pageType="WebPage"
+        name={COWORKING_TITLE}
+        description={COWORKING_DESCRIPTION}
+        breadcrumbLabel="فضای کار اشتراکی"
+      />
     </main>
   );
 }

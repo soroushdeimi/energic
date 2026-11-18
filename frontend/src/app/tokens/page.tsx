@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "توکن‌های طراحی | مرکز نوآوری انرژیک",
+  description: "توکن‌های طراحی (رنگ، فونت و فاصله) وب‌سایت مرکز نوآوری انرژیک",
+  // Internal design reference page: never indexed, no canonical, no social cards.
+  robots: { index: false, follow: true },
 };
 
 const COLORS: { name: string; value: string; className: string }[] = [

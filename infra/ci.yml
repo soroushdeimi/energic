@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: energic
+          POSTGRES_PASSWORD: energic
+          POSTGRES_DB: energic
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U energic"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - name: Install dependencies
+        run: uv sync --extra dev
+      - name: Ruff
+        run: uv run ruff check .
+      - name: Mypy
+        run: uv run mypy .
+      - name: Django checks
+        run: uv run python manage.py check
+      - name: Tests
+        env:
+          DJANGO_SETTINGS_MODULE: config.settings.dev
+          DATABASE_URL: postgres://energic:energic@localhost:5432/energic
+        run: uv run python manage.py test
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: ESLint
+        run: pnpm lint
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Prettier
+        run: pnpm format:check
+      - name: Build
+        run: pnpm build
+      - name: Playwright
+        run: pnpm exec playwright install --with-deps chromium && pnpm test:e2e
